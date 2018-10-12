@@ -3,7 +3,7 @@ package bean;
 import java.io.Serializable;
 import java.util.List;
 
-public class TitleBean {
+public class TitleBean implements Serializable{
 
     private int code;
     private DataBean data;
