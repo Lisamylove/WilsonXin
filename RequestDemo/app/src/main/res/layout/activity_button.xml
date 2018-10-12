@@ -4,11 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:orientation="vertical"
     tools:context=".MainActivity">
 
     <Button
         android:id="@+id/Ok_post"
         android:text="Okhttp请求方式"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:text="流式标签"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
 </LinearLayout>
