@@ -1,6 +1,7 @@
 package com.example.wilsonxin.requestdemo;
 
 import adapter.ListAdapter;
+import android.content.Intent;
 import android.os.Build;
 import android.os.Handler;
 import android.os.Message;
@@ -16,11 +17,17 @@ import com.google.gson.Gson;
 import okhttp3.*;
 
 import java.io.IOException;
+import java.io.Serializable;
 import java.util.List;
 
 public class MainActivity extends AppCompatActivity {
 
+    /**
+     * ButtonActivity中点击okHttp按钮跳转至该页面
+     */
     private String jsonurl="http://api.kkmh.com/v1/topic_new/discovery_list?sa_event=eyJwcm9qZWN0Ijoia3VhaWthbl9hcHAiLCJ0aW1lIjoxNTM5MjQ1MTA0ODg0LCJwcm9wZXJ0aWVzIjp7IkhvbWVwYWdlVGFiTmFtZSI6IueDremXqCIsIlZDb21tdW5pdHlUYWJOYW1lIjoi54Ot6ZeoIiwiJG9zX3ZlcnNpb24iOiI0LjQuMiIsIkZyb21GaW5kQ2F0ZWdvcnlUYWJOYW1lIjoi5YWo6YOoIiwiJGxpYl92ZXJzaW9uIjoiMS42LjYiLCIkbmV0d29ya190eXBlIjoiV0lGSSIsIiR3aWZpIjp0cnVlLCIkbWFudWZhY3R1cmVyIjoiSFVBV0VJICIsIkZyb21GaW5kVGFiTmFtZSI6IuaOqOiNkCIsIiRzY3JlZW5faGVpZ2h0IjoxMjgwLCJIb21lcGFnZVVwZGF0ZURhdGUiOjAsIlByb3BlcnR5RXZlbnQiOiJSZWFkRmluZFBhZ2UiLCJhYnRlc3RfZ3JvdXAiOjAsIiRzY3JlZW5fd2lkdGgiOjcyMCwiRmluZENhdGVnb3J5VGFiTmFtZSI6IuWFqOmDqCIsIiRvcyI6IkFuZHJvaWQiLCJUcmlnZ2VyUGFnZSI6IkhvbWVQYWdlIiwiJGNhcnJpZXIiOiJDSElOQSBNT0JJTEUiLCIkbW9kZWwiOiJIVUFXRUkgTUxBLUFMMTAiLCIkYXBwX3ZlcnNpb24iOiIzMzEwMCJ9LCJ0eXBlIjoidHJhY2siLCJkaXN0aW5jdF9pZCI6IkE6OGMxNjQ1MjgwMTgxNDQ5NCIsIm9yaWdpbmFsX2lkIjoiQTo4YzE2NDUyODAxODE0NDk0IiwiZXZlbnQiOiJSZWFkRmluZFBhZ2UifQ%3D%3D";
+    private ListView lv_list;
+    private List<TitleBean.DataBean.InfosBean> infos;
     Handler handler=new Handler(){
         @Override
         public void handleMessage(Message msg) {
@@ -28,17 +35,16 @@ public class MainActivity extends AppCompatActivity {
             String str = (String) msg.obj;
             Gson gson=new Gson();
             TitleBean json = gson.fromJson(str, TitleBean.class);
-            List<TitleBean.DataBean.InfosBean> infos = json.getData().getInfos();
-            lv_list.setAdapter(new ListAdapter(MainActivity.this,infos));
+            infos = json.getData().getInfos();
+            lv_list.setAdapter(new ListAdapter(MainActivity.this, infos));
         }
     };
-    private ListView lv_list;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        getSupportActionBar().hide();
+        getSupportActionBar().hide();//隐藏标题栏
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             //透明状态栏
             /**
@@ -51,14 +57,18 @@ public class MainActivity extends AppCompatActivity {
         }
         initView();//找控件
         GetData();//解析
-        ListViewOnClick();
+        ListViewOnClick();//listview的点击事件
     }
 
     private void ListViewOnClick() {
         lv_list.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-
+                Intent intent=new Intent(MainActivity.this,ViewPagerActivity.class);
+                Bundle bundle=new Bundle();
+                bundle.putSerializable("result", (Serializable) infos);
+                intent.putExtras(bundle);
+                startActivity(intent);
             }
         });
     }
