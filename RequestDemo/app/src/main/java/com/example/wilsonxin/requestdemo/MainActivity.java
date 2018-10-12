@@ -66,7 +66,7 @@ public class MainActivity extends AppCompatActivity {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 Intent intent=new Intent(MainActivity.this,ViewPagerActivity.class);
                 Bundle bundle=new Bundle();
-                bundle.putSerializable("result", (Serializable) infos);
+                bundle.putSerializable("result", (Serializable) infos.get(position).getTopics());
                 intent.putExtras(bundle);
                 startActivity(intent);
             }
