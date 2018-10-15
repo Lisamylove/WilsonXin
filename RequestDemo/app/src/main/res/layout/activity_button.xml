@@ -13,6 +13,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
     <Button
+        android:id="@+id/bt_button"
         android:text="流式标签"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
