@@ -8,6 +8,7 @@ import android.app.Activity;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.util.Log;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.*;
 
@@ -20,6 +21,11 @@ public class AnimationActivity extends Activity implements View.OnClickListener 
     private Button animation_one;
     private Button animation_two;
     private ImageView iv_imageview;
+    private Button bt_trans;
+    private Button bt_rotate;
+    private Button bt_scale;
+    private Button bt_alpha;
+    private ImageView iv_img;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -35,14 +41,15 @@ public class AnimationActivity extends Activity implements View.OnClickListener 
         PropertyValuesHolder scaleX = PropertyValuesHolder.ofFloat("scaleX", 1.0f, 0);
         PropertyValuesHolder scaleY = PropertyValuesHolder.ofFloat("scaleY", 1.0f, 0);
         //设置属性动画的target，设置要展示的动画效果
-        ObjectAnimator animator=ObjectAnimator.ofPropertyValuesHolder(iv_imageview,alpha,scaleX,scaleY);
+        ObjectAnimator animator = ObjectAnimator.ofPropertyValuesHolder(iv_imageview, alpha, scaleX, scaleY);
         animator.setDuration(5000);
-        Log.d("TAG"+"组合动画方式一执行时间=", String.valueOf(animator.getDuration()));
+        Log.d("TAG" + "组合动画方式一执行时间=", String.valueOf(animator.getDuration()));
         animator.setRepeatCount(2);//动画重复次数
-        Log.d("TAG"+"组合动画方式一重复次数=", String.valueOf(animator.getRepeatCount()));
+        Log.d("TAG" + "组合动画方式一重复次数=", String.valueOf(animator.getRepeatCount()));
         animator.start();
     }
-    public void combinel2(View view){
+
+    public void combinel2(View view) {
         final ObjectAnimator animator = ObjectAnimator.ofFloat(iv_imageview, "x", 1.0f, 0);
         //设置刷新监听
         animator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -57,25 +64,28 @@ public class AnimationActivity extends Activity implements View.OnClickListener 
             }
         });
         animator.setDuration(3000);
-        Log.d("TAG"+"组合动画方式二执行时间=", String.valueOf(animator.getDuration()));
+        Log.d("TAG" + "组合动画方式二执行时间=", String.valueOf(animator.getDuration()));
         animator.setRepeatCount(2);//动画重复次数
-        Log.d("TAG"+"组合动画方式二重复次数=", String.valueOf(animator.getRepeatCount()));
+        Log.d("TAG" + "组合动画方式二重复次数=", String.valueOf(animator.getRepeatCount()));
         //监听动画是否结束
         animator.addListener(new Animator.AnimatorListener() {
             @Override
             public void onAnimationEnd(Animator animation) {
-            // TODO Restore view
+                // TODO Restore view
 //                FrameLayout.LayoutParams ll = new FrameLayout.LayoutParams(LinearLayout.LayoutParams.WRAP_CONTENT, LinearLayout.LayoutParams.FILL_PARENT);
 //                ll.setMargins(0, 0, 0, 0);
 //                iv_imageview.setLayoutParams(ll);
-                Toast.makeText(AnimationActivity.this,"动画效果结束",Toast.LENGTH_SHORT).show();
+                Toast.makeText(AnimationActivity.this, "动画效果结束", Toast.LENGTH_SHORT).show();
             }
+
             @Override
             public void onAnimationStart(Animator animation) {
             }
+
             @Override
             public void onAnimationRepeat(Animator animation) {
             }
+
             @Override
             public void onAnimationCancel(Animator animation) {
             }
@@ -121,20 +131,57 @@ public class AnimationActivity extends Activity implements View.OnClickListener 
         animation_one = findViewById(R.id.animation_one);
         animation_two = findViewById(R.id.animation_two);
         iv_imageview = findViewById(R.id.iv_imageview);
+        iv_img = findViewById(R.id.iv_img);
+        bt_trans = findViewById(R.id.bt_trans);//位移
+        bt_rotate = findViewById(R.id.bt_rotate);//旋转
+        bt_scale = findViewById(R.id.bt_scale);//缩放
+        bt_alpha = findViewById(R.id.bt_alpha);
         //按钮设置监听事件
         animation_one.setOnClickListener(this);
         animation_two.setOnClickListener(this);
+        bt_trans.setOnClickListener(this);
+        bt_rotate.setOnClickListener(this);
     }
 
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.animation_one:
                 combinel1(v);
                 break;
             case R.id.animation_two:
                 combinel2(v);
                 break;
+            case R.id.bt_trans:
+                Trans();
+                break;
+            case R.id.bt_rotate:
+                Rotate();
+                break;
         }
+    }
+
+    private void Rotate() {
+        /**
+         * 属性动画  旋转
+         */
+        ObjectAnimator animator=ObjectAnimator.ofFloat(iv_imageview,"rotation",0,100,150,167,230,360);
+        animator.setDuration(3000);
+        animator.setRepeatCount(3);
+        animator.start();
+    }
+
+    private void Trans() {
+        /**属性动画   位移
+         * target   目标控件
+         * property 动画类型
+         * values   可变参数
+         */
+        ObjectAnimator animator = ObjectAnimator.ofFloat(iv_img, "translationX", -300, -10, -30, -80, -150, -300);
+        animator.setDuration(5000);
+        animator.start();
+        Toast toast = Toast.makeText(this, "位移动画", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.CENTER, 0, 0);
+        toast.show();
     }
 }
