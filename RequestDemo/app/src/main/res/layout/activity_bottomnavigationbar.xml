@@ -27,6 +27,7 @@
             android:layout_height="match_parent"
             android:background="#ed4255"
             android:text="菜单"
+            android:clickable="true"
             android:textColor="#ffffffff"
             android:textSize="18dp"
             />
