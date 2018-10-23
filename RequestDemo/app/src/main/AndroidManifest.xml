@@ -20,6 +20,7 @@
         <activity android:name=".ViewPagerActivity"></activity>
         <activity android:name=".CurrentLabelActivity"></activity>
         <activity android:name=".AnimationActivity"></activity>
+        <activity android:name=".BottomNavigationBarActivity"></activity>
     </application>
 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>
