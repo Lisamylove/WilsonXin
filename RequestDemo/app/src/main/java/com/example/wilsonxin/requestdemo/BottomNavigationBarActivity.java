@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.FrameLayout;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
+import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
 import fragment.BirdFragment;
 import fragment.CoffeeFragment;
 import fragment.FishFragment;
@@ -98,14 +99,26 @@ public class BottomNavigationBarActivity extends AppCompatActivity implements Bo
 
     /**
      * 标题栏菜单按钮的点击事件
-     * @param v
+     * 1、SlidingMenu使用前导入依赖包
+     * 2、修改依赖包中 build.
+     * * @param v
      */
     @Override
     public void onClick(View v) {
-        switch (v.getId()){
+        switch (v.getId()) {
             case R.id.button_menu:
-
+                SlidingMenuDate();//侧滑菜单
                 break;
         }
+    }
+    //侧滑菜单
+    private void SlidingMenuDate() {
+        SlidingMenu slidingMenu = new SlidingMenu(this);
+        slidingMenu.setMode(SlidingMenu.LEFT);
+        slidingMenu.setBehindOffset(200);
+        //设置让侧滑依附于activity之上
+        slidingMenu.attachToActivity(BottomNavigationBarActivity.this, SlidingMenu.SLIDING_CONTENT);
+        //设置侧滑布局
+        slidingMenu.setMenu(R.layout.menu);
     }
 }
