@@ -45,16 +45,16 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         getSupportActionBar().hide();//隐藏标题栏
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
-            //透明状态栏
-            /**
-             * FLAG_FULLSCREEN    导航栏包含导航栏的标签完全隐藏
-             * FLAGS_CHANGED       导航栏不做改变
-             */
-            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-            //透明导航栏
-//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
-        }
+//        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+//            //透明状态栏
+//            /**
+//             * FLAG_FULLSCREEN    导航栏包含导航栏的标签完全隐藏
+//             * FLAGS_CHANGED       导航栏不做改变
+//             */
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+//            //透明导航栏
+////            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//        }
         initView();//找控件
         GetData();//解析
         ListViewOnClick();//listview的点击事件

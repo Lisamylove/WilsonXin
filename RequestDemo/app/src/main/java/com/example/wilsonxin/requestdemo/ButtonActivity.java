@@ -11,6 +11,7 @@ public class ButtonActivity extends Activity implements View.OnClickListener {
     private Button ok_get;
     private Button bt_button;
     private Button bt_donghua;
+    private Button bt_bottomNavigationBar;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -21,12 +22,14 @@ public class ButtonActivity extends Activity implements View.OnClickListener {
         bt_button.setOnClickListener(this);
         ok_get.setOnClickListener(this);
         bt_donghua.setOnClickListener(this);
+        bt_bottomNavigationBar.setOnClickListener(this);
     }
 
     private void initView() {
         ok_get = findViewById(R.id.Ok_post);
         bt_button = findViewById(R.id.bt_button);
         bt_donghua = findViewById(R.id.bt_donghua);
+        bt_bottomNavigationBar = findViewById(R.id.bt_BottomNavigationBar);
     }
 
     @Override
@@ -44,6 +47,9 @@ public class ButtonActivity extends Activity implements View.OnClickListener {
                 Intent intent1 = new Intent(ButtonActivity.this, AnimationActivity.class);
                 startActivity(intent1);
                 break;
+            case R.id.bt_BottomNavigationBar://导航栏编写
+                Intent intent3 = new Intent(ButtonActivity.this, BottomNavigationBarActivity.class);
+                startActivity(intent3);
             default:
                 break;
         }
