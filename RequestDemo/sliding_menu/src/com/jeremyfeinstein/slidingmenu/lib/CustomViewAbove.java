@@ -683,6 +683,8 @@ public class CustomViewAbove extends ViewGroup {
 
 		switch (action & MotionEventCompat.ACTION_MASK) {
 		case MotionEvent.ACTION_DOWN:
+//			mIsBeingDragged = false;
+//			mQuickReturn = false;
 			/*
 			 * If being flinged and user touches, stop the fling. isFinished
 			 * will be false if being flinged.
@@ -693,6 +695,7 @@ public class CustomViewAbove extends ViewGroup {
 			int index = MotionEventCompat.getActionIndex(ev);
 			mActivePointerId = MotionEventCompat.getPointerId(ev, index);
 			mLastMotionX = mInitialMotionX = ev.getX();
+//			return mQuickReturn;
 			break;
 		case MotionEvent.ACTION_MOVE:
 			if (!mIsBeingDragged) {	
