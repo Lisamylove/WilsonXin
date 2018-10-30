@@ -12,6 +12,7 @@ public class ButtonActivity extends Activity implements View.OnClickListener {
     private Button bt_button;
     private Button bt_donghua;
     private Button bt_bottomNavigationBar;
+    private Button bt_xuanzekuang;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -23,6 +24,7 @@ public class ButtonActivity extends Activity implements View.OnClickListener {
         ok_get.setOnClickListener(this);
         bt_donghua.setOnClickListener(this);
         bt_bottomNavigationBar.setOnClickListener(this);
+        bt_xuanzekuang.setOnClickListener(this);
     }
 
     private void initView() {
@@ -30,6 +32,7 @@ public class ButtonActivity extends Activity implements View.OnClickListener {
         bt_button = findViewById(R.id.bt_button);
         bt_donghua = findViewById(R.id.bt_donghua);
         bt_bottomNavigationBar = findViewById(R.id.bt_BottomNavigationBar);
+        bt_xuanzekuang = findViewById(R.id.bt_xuanzekuang);
     }
 
     @Override
@@ -50,6 +53,11 @@ public class ButtonActivity extends Activity implements View.OnClickListener {
             case R.id.bt_BottomNavigationBar://导航栏编写
                 Intent intent3 = new Intent(ButtonActivity.this, BottomNavigationBarActivity.class);
                 startActivity(intent3);
+                break;
+            case R.id.bt_xuanzekuang:
+                Intent intent4 = new Intent(ButtonActivity.this, CheckBoxActivity.class);
+                startActivity(intent4);
+                break;
             default:
                 break;
         }

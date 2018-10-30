@@ -1,21 +1,24 @@
 package com.example.wilsonxin.requestdemo;
 
+import android.app.Activity;
 import android.graphics.Color;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
+import android.view.ViewGroup;
+import android.view.Window;
+import android.view.WindowManager;
 import android.widget.Button;
 import android.widget.FrameLayout;
 import com.ashokvarma.bottomnavigation.BottomNavigationBar;
 import com.ashokvarma.bottomnavigation.BottomNavigationItem;
 import com.jeremyfeinstein.slidingmenu.lib.SlidingMenu;
-import fragment.BirdFragment;
-import fragment.CoffeeFragment;
-import fragment.FishFragment;
-import fragment.FlyFragment;
+import com.makeramen.roundedimageview.RoundedImageView;
+import fragment.*;
 
 
 public class BottomNavigationBarActivity extends AppCompatActivity implements BottomNavigationBar.OnTabSelectedListener, View.OnClickListener {
@@ -23,19 +26,28 @@ public class BottomNavigationBarActivity extends AppCompatActivity implements Bo
     private BottomNavigationBar button_bar;
     private FrameLayout framelayout;
     private Button button_menu;
+    private SlidingMenu slidingMenu;
+    private RoundedImageView button_caidan;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getSupportActionBar().hide();//隐藏标题栏
         setContentView(R.layout.activity_bottomnavigationbar);
+//                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+////            //透明状态栏
+////            /**
+////             * FLAG_FULLSCREEN    导航栏包含导航栏的标签完全隐藏
+////             * FLAGS_CHANGED       导航栏不做改变
+////             */
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
+////            //透明导航栏
+//            getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_NAVIGATION);
+//        }
         initView();//找控件
         AddItem();//BottomNavigationBar中添加导航Icon饼初始化
-        //设置监听事件
-        button_bar.setTabSelectedListener(this);
         ChageFragment(new FishFragment(), "fish fragment");
     }
-
     private void AddItem() {
         button_bar.addItem(new BottomNavigationItem(R.mipmap.icon_one, "Fish").setActiveColor(Color.BLUE))
                 .addItem(new BottomNavigationItem(R.mipmap.icon_two, "Fly").setActiveColor(Color.YELLOW))
@@ -51,8 +63,12 @@ public class BottomNavigationBarActivity extends AppCompatActivity implements Bo
     private void initView() {
         button_bar = findViewById(R.id.button_Bar);
         framelayout = findViewById(R.id.framelayout);
-        button_menu = findViewById(R.id.button_menu);
-        button_menu.setOnClickListener(this);//设置菜单的点击事件
+        button_caidan = findViewById(R.id.button_caidan);
+        //标题栏菜单设置监听事件
+        button_caidan.setOnClickListener(this);
+        SlidingMenuDate();//侧滑页面的方法   初始化方法
+        //BottomNavigationBar设置监听事件
+        button_bar.setTabSelectedListener(this);
     }
 
     //BottomNavigationBar监听事件方法
@@ -103,22 +119,36 @@ public class BottomNavigationBarActivity extends AppCompatActivity implements Bo
      * 2、修改依赖包中 build.
      * * @param v
      */
-    @Override
-    public void onClick(View v) {
-        switch (v.getId()) {
-            case R.id.button_menu:
-                SlidingMenuDate();//侧滑菜单
-                break;
-        }
-    }
     //侧滑菜单
     private void SlidingMenuDate() {
-        SlidingMenu slidingMenu = new SlidingMenu(this);
+        //创建SlidingMenu
+        slidingMenu = new SlidingMenu(this);
+        //设置滑动模式   从左往右滑动
         slidingMenu.setMode(SlidingMenu.LEFT);
+        //设置侧滑的宽度
         slidingMenu.setBehindOffset(200);
         //设置让侧滑依附于activity之上
         slidingMenu.attachToActivity(BottomNavigationBarActivity.this, SlidingMenu.SLIDING_CONTENT);
         //设置侧滑布局
         slidingMenu.setMenu(R.layout.menu);
+        initFragment();
+    }
+
+    private void initFragment() {
+        //开启事务
+        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+        //替换
+        transaction.replace(R.id.menu, new MenuFragment());
+        //提交
+        transaction.commit();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.button_caidan:
+                slidingMenu.showMenu();
+                break;
+        }
     }
 }
