@@ -30,4 +30,9 @@
         android:text="BottomNavigationBar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/bt_xuanzekuang"
+        android:text="单选与复选框的实现"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
 </LinearLayout>
