@@ -16,4 +16,5 @@ public class BirdFragment extends Fragment {
         View view=inflater.inflate(R.layout.fragment_bird,null);
         return view;
     }
+
 }
