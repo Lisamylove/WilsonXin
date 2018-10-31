@@ -90,7 +90,7 @@ public class MenuBean {
             private String label_text_color;
             private int serial_no;
             private String status;
-
+            public boolean isCheck;
             public int getInfo_type() {
                 return info_type;
             }

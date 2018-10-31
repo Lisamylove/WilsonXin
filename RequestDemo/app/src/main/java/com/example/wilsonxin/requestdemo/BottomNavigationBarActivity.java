@@ -126,7 +126,7 @@ public class BottomNavigationBarActivity extends AppCompatActivity implements Bo
         //设置滑动模式   从左往右滑动
         slidingMenu.setMode(SlidingMenu.LEFT);
         //设置侧滑的宽度
-        slidingMenu.setBehindOffset(200);
+        slidingMenu.setBehindOffset(100);
         //设置让侧滑依附于activity之上
         slidingMenu.attachToActivity(BottomNavigationBarActivity.this, SlidingMenu.SLIDING_CONTENT);
         //设置侧滑布局

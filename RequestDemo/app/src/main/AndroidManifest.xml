@@ -21,6 +21,7 @@
         <activity android:name=".CurrentLabelActivity"></activity>
         <activity android:name=".AnimationActivity"></activity>
         <activity android:name=".BottomNavigationBarActivity"></activity>
+        <activity android:name=".CheckBoxActivity"></activity>
     </application>
 <uses-permission android:name="android.permission.INTERNET"></uses-permission>
 </manifest>
