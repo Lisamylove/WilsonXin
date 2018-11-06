@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
+import android.support.v7.widget.RecyclerView;
 import android.view.View;
 import android.widget.Button;
 
@@ -13,6 +14,7 @@ public class ButtonActivity extends Activity implements View.OnClickListener {
     private Button bt_donghua;
     private Button bt_bottomNavigationBar;
     private Button bt_xuanzekuang;
+    private Button bt_recyclerView;
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
@@ -25,6 +27,7 @@ public class ButtonActivity extends Activity implements View.OnClickListener {
         bt_donghua.setOnClickListener(this);
         bt_bottomNavigationBar.setOnClickListener(this);
         bt_xuanzekuang.setOnClickListener(this);
+        bt_recyclerView.setOnClickListener(this);
     }
 
     private void initView() {
@@ -33,6 +36,7 @@ public class ButtonActivity extends Activity implements View.OnClickListener {
         bt_donghua = findViewById(R.id.bt_donghua);
         bt_bottomNavigationBar = findViewById(R.id.bt_BottomNavigationBar);
         bt_xuanzekuang = findViewById(R.id.bt_xuanzekuang);
+        bt_recyclerView = findViewById(R.id.bt_recyclerView);
     }
 
     @Override
@@ -58,6 +62,8 @@ public class ButtonActivity extends Activity implements View.OnClickListener {
                 Intent intent4 = new Intent(ButtonActivity.this, CheckBoxActivity.class);
                 startActivity(intent4);
                 break;
+            case R.id.bt_recyclerView:
+
             default:
                 break;
         }
