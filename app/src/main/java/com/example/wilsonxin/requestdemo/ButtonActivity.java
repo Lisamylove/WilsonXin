@@ -63,7 +63,7 @@ public class ButtonActivity extends Activity implements View.OnClickListener {
                 startActivity(intent4);
                 break;
             case R.id.bt_recyclerView:
-
+                Intent intent5 = new Intent(ButtonActivity.this, RecyclerViewActivity.class);
             default:
                 break;
         }
